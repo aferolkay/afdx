@@ -1,0 +1,28 @@
+{
+  "run": {
+    "config_fingerprint": "8c26df75e7fdcab3f6f44d80753dda40787aff451ddd31d3067f2ae988c14245",
+    "end_system_count": 2,
+    "frames_delivered": 31,
+    "frames_lost": 0,
+    "frames_sent": 31,
+    "sim_duration": 1.0,
+    "switch_count": 0,
+    "vl_count": 1
+  },
+  "switches": {},
+  "vls": {
+    "1000": {
+      "bag_wait_max": 0.0,
+      "credit_min": null,
+      "dropped_by_policer": 0,
+      "dropped_in_queue": 0,
+      "frames_delivered": 31,
+      "frames_lost": 0,
+      "frames_sent": 31,
+      "jitter": 0.0,
+      "latency_max": 199.86,
+      "latency_mean": 199.86,
+      "receiver_count": 1
+    }
+  }
+}

@@ -1,0 +1,6 @@
+*** VL ID - Ports Mapping for S3 (ports: 0=S1, 1=E4, 2=E5) ***
+0x6 : {0}
+0x7 : {0}
+0x8 : {0}
+0x9 : {0}
+0xD : {0}

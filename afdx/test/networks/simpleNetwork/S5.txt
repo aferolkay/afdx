@@ -1,0 +1,2 @@
+*** VL ID - Ports Mapping for S5 (ports: 0=S4, 1=E6) ***
+0xE : {0}
