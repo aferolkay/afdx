@@ -1,184 +1,112 @@
 {
   "run": {
-    "config_fingerprint": "45db6b8718b41f38eea0176dd7145e73ca2bfb38764046905d5553ea0f885741",
-    "end_system_count": 7,
-    "frames_delivered": 7748,
-    "frames_lost": 2,
-    "frames_sent": 7750,
-    "sim_duration": 1.0,
-    "switch_count": 5,
-    "vl_count": 11
+    "sim_duration": 1.0
   },
   "switches": {
     "0": {
-      "queue_len_max": 7112.0,
-      "queueing_time_max": 60.27,
-      "queueing_time_mean": 13.544
+      "queueing_time_max": 60.27
     },
     "1": {
-      "queue_len_max": 0.0,
-      "queueing_time_max": 0.0,
-      "queueing_time_mean": 0.0
+      "queueing_time_max": 0.0
     },
     "2": {
-      "queue_len_max": 8712.0,
-      "queueing_time_max": 62.84,
-      "queueing_time_mean": 22.145
+      "queueing_time_max": 62.84
     },
     "3": {
-      "queue_len_max": 0.0,
-      "queueing_time_max": 0.0,
-      "queueing_time_mean": 0.0
+      "queueing_time_max": 0.0
     },
     "4": {
-      "queue_len_max": 0.0,
-      "queueing_time_max": 0.0,
-      "queueing_time_mean": 0.0
+      "queueing_time_max": 0.0
     }
   },
   "vls": {
     "1": {
-      "bag_wait_max": 0.0,
-      "credit_min": 30000.0,
       "dropped_by_policer": 0,
       "dropped_in_queue": 0,
       "frames_delivered": 1000,
-      "frames_lost": 0,
       "frames_sent": 1000,
-      "jitter": 0.0,
       "latency_max": 497.27,
-      "latency_mean": 497.27,
-      "receiver_count": 1
+      "latency_mean": 497.27
     },
     "2": {
-      "bag_wait_max": 0.0,
-      "credit_min": 15336.0,
       "dropped_by_policer": 0,
       "dropped_in_queue": 0,
       "frames_delivered": 500,
-      "frames_lost": 0,
       "frames_sent": 500,
-      "jitter": 0.0,
       "latency_max": 450.84,
-      "latency_mean": 450.84,
-      "receiver_count": 1
+      "latency_mean": 450.84
     },
     "5": {
-      "bag_wait_max": 0.0,
-      "credit_min": 10608.0,
       "dropped_by_policer": 0,
       "dropped_in_queue": 0,
       "frames_delivered": 1000,
-      "frames_lost": 0,
       "frames_sent": 1000,
-      "jitter": 0.0,
       "latency_max": 218.9,
-      "latency_mean": 218.9,
-      "receiver_count": 1
+      "latency_mean": 218.9
     },
     "6": {
-      "bag_wait_max": 0.0,
-      "credit_min": 21816.0,
       "dropped_by_policer": 0,
       "dropped_in_queue": 0,
       "frames_delivered": 1000,
-      "frames_lost": 0,
       "frames_sent": 1000,
-      "jitter": 0.0,
       "latency_max": 597.51,
-      "latency_mean": 597.51,
-      "receiver_count": 1
+      "latency_mean": 597.51
     },
     "7": {
-      "bag_wait_max": 0.0,
-      "credit_min": 19342.89984,
       "dropped_by_policer": 0,
       "dropped_in_queue": 0,
       "frames_delivered": 999,
-      "frames_lost": 1,
       "frames_sent": 1000,
-      "jitter": 40.56,
       "latency_max": 662.81,
-      "latency_mean": 642.5097,
-      "receiver_count": 1
+      "latency_mean": 642.5097
     },
     "8": {
-      "bag_wait_max": 0.0,
-      "credit_min": 26616.0,
       "dropped_by_policer": 0,
       "dropped_in_queue": 0,
       "frames_delivered": 500,
-      "frames_lost": 0,
       "frames_sent": 500,
-      "jitter": 0.0,
       "latency_max": 801.89,
-      "latency_mean": 801.89,
-      "receiver_count": 1
+      "latency_mean": 801.89
     },
     "9": {
-      "bag_wait_max": 0.0,
-      "credit_min": 16440.0,
       "dropped_by_policer": 0,
       "dropped_in_queue": 0,
       "frames_delivered": 1000,
-      "frames_lost": 0,
       "frames_sent": 1000,
-      "jitter": 0.0,
       "latency_max": 610.76,
-      "latency_mean": 610.76,
-      "receiver_count": 1
+      "latency_mean": 610.76
     },
     "b": {
-      "bag_wait_max": 0.0,
-      "credit_min": 7368.0,
       "dropped_by_policer": 0,
       "dropped_in_queue": 0,
       "frames_delivered": 250,
-      "frames_lost": 0,
       "frames_sent": 250,
-      "jitter": 0.0,
       "latency_max": 270.95,
-      "latency_mean": 270.95,
-      "receiver_count": 1
+      "latency_mean": 270.95
     },
     "c": {
-      "bag_wait_max": 0.0,
-      "credit_min": 16008.0,
       "dropped_by_policer": 0,
       "dropped_in_queue": 0,
       "frames_delivered": 500,
-      "frames_lost": 0,
       "frames_sent": 500,
-      "jitter": 0.0,
       "latency_max": 459.8,
-      "latency_mean": 459.8,
-      "receiver_count": 1
+      "latency_mean": 459.8
     },
     "d": {
-      "bag_wait_max": 0.0,
-      "credit_min": 16440.0,
       "dropped_by_policer": 0,
       "dropped_in_queue": 0,
       "frames_delivered": 499,
-      "frames_lost": 1,
       "frames_sent": 500,
-      "jitter": 0.0,
       "latency_max": 569.45,
-      "latency_mean": 569.45,
-      "receiver_count": 1
+      "latency_mean": 569.45
     },
     "e": {
-      "bag_wait_max": 0.0,
-      "credit_min": 7368.0,
       "dropped_by_policer": 0,
       "dropped_in_queue": 0,
       "frames_delivered": 500,
-      "frames_lost": 0,
       "frames_sent": 500,
-      "jitter": 0.0,
       "latency_max": 418.25,
-      "latency_mean": 418.25,
-      "receiver_count": 1
+      "latency_mean": 418.25
     }
   }
 }

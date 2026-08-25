@@ -13,10 +13,6 @@ from typing import Any
 from .extractor import Extractor
 from .metrics import RUN_METRICS, SWITCH_METRICS, VL_METRICS
 
-# A value that could not be measured. Stored as JSON null.
-NOT_MEASURED = None
-
-
 @dataclass
 class Measurements:
     """Every parameter of one run, grouped the way metrics.py groups them.
@@ -59,11 +55,25 @@ class Measurements:
                 + sum(len(v) for v in self.switches.values())
                 + sum(len(v) for v in self.vls.values()))
 
+    def missing(self) -> list[str]:
+        """Names of parameters for which the extractor returned no value."""
+        result = [f"run.{name}" for name, value in self.run.items()
+                  if value is None]
+        for group_name in ("switches", "vls"):
+            group = getattr(self, group_name)
+            result.extend(
+                f"{group_name}.{item}.{name}"
+                for item, values in group.items()
+                for name, value in values.items()
+                if value is None
+            )
+        return result
+
 
 def _call(extractor: Extractor, method_name: str, *args) -> Any:
     """Call one extractor method by its name.
 
-    `getattr(obj, "vl_jitter")` fetches the method whose name is that string,
+    `getattr(obj, "vl_latency_max")` fetches the method whose name is that string,
     which is what lets metrics.py stay the single source of truth: the metric's
     name IS the method's name, so adding a metric needs no changes here.
     """

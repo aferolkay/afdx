@@ -1,9 +1,7 @@
 """
 Compare a run against a baseline, and print the result.
 
-Every parameter either passes or fails. There are no in-between categories: if a
-value moved further than metrics.py allows, that is a failure, and if a parameter
-that used to be measurable no longer is, that is also a failure.
+Every parameter either matches exactly or fails. Missing data is also a failure.
 """
 
 from dataclasses import dataclass
@@ -42,11 +40,10 @@ class Check:
         if self.baseline is MISSING or self.actual is MISSING:
             return False
         if self.baseline is None or self.actual is None:
-            # Both unmeasured is fine; one of the two changing is not.
-            return self.baseline is None and self.actual is None
-        if isinstance(self.baseline, str) or isinstance(self.actual, str):
-            return self.baseline == self.actual
-        return self.metric.accepts(self.baseline, self.actual)
+            # An unavailable value is not a successful regression check, even
+            # when an old baseline also happened to store it as null.
+            return False
+        return self.baseline == self.actual
 
     @property
     def note(self) -> str:
@@ -57,6 +54,8 @@ class Check:
             return "GONE -- not in this run"
         if self.baseline is None and self.actual is not None:
             return "newly measurable (baseline had no value)"
+        if self.baseline is None and self.actual is None:
+            return "NOT MEASURED in either run"
         if self.actual is None and self.baseline is not None:
             return "NOT MEASURED in this run"
         return ""
@@ -65,18 +64,15 @@ class Check:
         """One line explaining the verdict."""
         if self.note:
             return self.note
-        if isinstance(self.baseline, str):
-            return f"baseline {self.baseline[:16]}...  actual {self.actual[:16]}..."
+        if isinstance(self.baseline, str) or isinstance(self.actual, str):
+            return f"baseline {self.baseline!r}  actual {self.actual!r}"
 
         delta = self.actual - self.baseline
         line = (f"baseline {_number(self.baseline)}   "
                 f"actual {_number(self.actual)}   {_number(delta, sign=True)}")
         if self.baseline:
             line += f" ({delta / self.baseline:+.1%})"
-        if self.metric.tolerance:
-            line += f", allowed {self.metric.tolerance:.0%}"
-        else:
-            line += ", must match exactly"
+        line += ", must match exactly"
         return line
 
 

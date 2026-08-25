@@ -2,7 +2,7 @@
 A characterization test for the AFDX model.
 
 It measures a fixed set of parameters from a simulation run, saves them as a
-baseline, and fails if a later run moves any of them further than allowed.
+baseline, and fails if a later run changes any of them.
 
     metrics.py    the parameter set -- edit this by hand
     extractor.py  the API you implement to feed a model into it

@@ -31,11 +31,10 @@ def command_list(args):
         print(f"\n{title}\n{'-' * len(title)}")
         width = max(len(m.label) for m in metrics)
         for metric in metrics:
-            allowed = "exact" if not metric.tolerance else f"{metric.tolerance:.0%}"
-            print(f"  {prefix}{metric.label:<{width}}  [{allowed:>5}]  {metric.meaning}")
+            print(f"  {prefix}{metric.label:<{width}}  [exact]  {metric.meaning}")
 
     total = len(RUN_METRICS) + len(VL_METRICS) + len(SWITCH_METRICS)
-    print(f"\n{total} parameters defined, in test/harness/metrics.py")
+    print(f"\n{total} metric types defined, in test/harness/metrics.py")
     print("[exact] means the value may not move at all.\n")
     return 0
 
@@ -43,6 +42,12 @@ def command_list(args):
 def command_record(args):
     """Measure a run and save it as the baseline to compare future runs against."""
     result = measure(AfdxExtractor(args.results))
+    missing = result.missing()
+    if missing:
+        print(f"{_prefix(args)}cannot record an incomplete baseline:")
+        for name in missing:
+            print(f"{args.indent}  NOT MEASURED  {name}")
+        return 1
     result.save(args.baseline)
     print(f"{_prefix(args)}recorded {result.count} parameters -> {args.baseline}")
     return 0

@@ -1049,3 +1049,12 @@ dkms.conf
 *_m.h
 afdx/src/Makefile
 *.anf
+
+# Built simulation binary (opp_makemake links it next to the sources).
+afdx/src/afdx
+afdx/src/afdx_dbg
+*.exe
+
+# Regression harness output is regenerated on every run. The committed
+# afdx/test/networks/*/baseline.json files are not ignored.
+afdx/test/networks/*/results/

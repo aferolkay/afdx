@@ -32,13 +32,33 @@ RECORD=0
 
 while [ $# -gt 0 ]; do
     case "$1" in
-        --network)  ONLY=$2; shift 2 ;;
+        --network)
+            [ $# -ge 2 ] || { echo "--network requires a name" >&2; exit 2; }
+            ONLY=$2
+            shift 2
+            ;;
         --record)   RECORD=1; shift ;;
         --list)     python3 -m harness list; exit 0 ;;
         -h|--help)  sed -n '2,14p' "$0"; exit 0 ;;
         *)          echo "unknown option: $1" >&2; exit 2 ;;
     esac
 done
+
+if [ -n "$ONLY" ]; then
+    found=0
+    for entry in "${NETWORKS[@]}"; do
+        folder=${entry%%:*}
+        config=${entry##*:}
+        if [ "$ONLY" = "$folder" ] || [ "$ONLY" = "$config" ]; then
+            found=1
+            break
+        fi
+    done
+    if [ $found -eq 0 ]; then
+        echo "unknown network: $ONLY" >&2
+        exit 2
+    fi
+fi
 
 # ---------------------------------------------------------------------------
 # environment
@@ -128,9 +148,9 @@ for entry in "${NETWORKS[@]}"; do
     echo "      ran to t=1s, exit 0, results written"
 
     # --- measure, then record or compare -------------------------------------
-    if [ $RECORD -eq 1 ] || [ ! -f "$baseline" ]; then
-        [ $RECORD -eq 0 ] && echo "      no baseline yet -- recording one"
-        if python3 -m harness record "$results" "$baseline" --indent "      "; then
+    if [ $RECORD -eq 1 ]; then
+        if python3 -m harness record "$results" "$baseline" \
+                --label "$config" --indent "      "; then
             PASSED+=("$config")
         else
             FAILED+=("$config")
@@ -138,7 +158,14 @@ for entry in "${NETWORKS[@]}"; do
         continue
     fi
 
-    if python3 -m harness check "$results" "$baseline" --indent "      "; then
+    if [ ! -f "$baseline" ]; then
+        echo "      FAIL: no baseline at $baseline (use --record deliberately)"
+        FAILED+=("$config")
+        continue
+    fi
+
+    if python3 -m harness check "$results" "$baseline" \
+            --label "$config" --indent "      "; then
         PASSED+=("$config")
     else
         FAILED+=("$config")
